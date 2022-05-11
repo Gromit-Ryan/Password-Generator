@@ -5,12 +5,12 @@ var upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 var lowerCase = "abcdefghijklmnopqrstuvwxyz";
 var numbers = "1234567890";
 var specialChar = "!@#$%^&*"
-var userPass = 1;
 var random;
 var i = 0;
     
     // The function for generating the password
     var generatePassword = function () {
+      var newPassword = '';
       // The user prompts for determining what the user wants
       // The starting values are false, so the options the user wants will change to true.
       userPrompt[1] = confirm(`Would you like lowercase letters in your password?`);
@@ -26,6 +26,8 @@ var i = 0;
       //Used for debug purposes
       console.log(lengthPassword);
       console.log(typeof lengthPassword);
+
+      
     
       //While the number inputted is larger than the integer number it will continue repeating
       while (lengthPassword > i) {
@@ -38,31 +40,32 @@ var i = 0;
         // that correlates with that number is true.
         if (userPrompt[random] && random == 1) {
             random = Math.floor(Math.random() * upperCase.length)
-            userPass = userPass + upperCase.charAt(random);
+            newPassword = newPassword + upperCase.charAt(random);
             i++;
         } else if (userPrompt[random] && random == 2) {
             random = Math.floor(Math.random() * lowerCase.length)
-            userPass = userPass + lowerCase.charAt(random);
+            newPassword = newPassword + lowerCase.charAt(random);
             i++;
         } else if (userPrompt[random] && random == 3) {
             random = Math.floor(Math.random() * numbers.length)
-            userPass = userPass + numbers.charAt(random);
+            newPassword = newPassword + numbers.charAt(random);
             i++;
         } else if (userPrompt[random] && random == 4) {
             random = Math.floor(Math.random() * specialChar.length)
-            userPass = userPass + specialChar.charAt(random);
+            newPassword = newPassword + specialChar.charAt(random);
             i++;
         } 
       }
-      console.log(userPass);
+      console.log(newPassword);
+
+      return newPassword;
     }
     // Get references to the #generate element
     var generateBtn = document.querySelector("#generate");
     
     // Write password to the #password input
     function writePassword() {
-        generatePassword()
-      var password = userPass;
+      var password = generatePassword();
       var passwordText = document.querySelector("#password");
     
       passwordText.value = password;
